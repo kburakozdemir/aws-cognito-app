@@ -42,7 +42,14 @@ $username = $_GET['username'] ?? '';
             <li><a href='/forgotpassword.php'>Forgotten password</a></li>
             <li><a href='/logout.php'>Logout</a></li>
         </ul>
+
+        <?php
+        if (isset($error)) {
+          ?>
         <p style='color: red;'><?php echo $error;?></p>
+          <?php
+        }
+        ?>
         <h1>Confirm signup</h1>
         <form method='post' action=''>
             <input type='text' placeholder='Username' name='username' value='<?php echo $username;?>' /><br />

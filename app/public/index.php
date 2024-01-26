@@ -59,7 +59,13 @@ if (isset($_GET['reset'])) {
             <li><a href='/forgotpassword.php'>Forgotten password</a></li>
             <li><a href='/logout.php'>Logout</a></li>
         </ul>
+        <?php
+        if (isset($error)) {
+          ?>
         <p style='color: red;'><?php echo $error;?></p>
+          <?php
+        }
+        ?>
         <p style='color: green;'><?php echo $message;?></p>
         <h1>Register</h1>
         <form method='post' action=''>
