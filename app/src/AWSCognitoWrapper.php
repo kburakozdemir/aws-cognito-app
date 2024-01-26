@@ -23,13 +23,13 @@ class AWSCognitoWrapper {
    *
    */
   public function __construct() {
-    if (!getenv('REGION') || !getenv('CLIENT_ID') || !getenv('USERPOOL_ID')) {
+    if (!$_ENV['REGION'] || !$_ENV['CLIENT_ID'] || !$_ENV['USERPOOL_ID']) {
       throw new \InvalidArgumentException("Please provide the region, client_id and userpool_id variables in the .env file");
     }
 
-    $this->region = getenv('REGION');
-    $this->client_id = getenv('CLIENT_ID');
-    $this->userpool_id = getenv('USERPOOL_ID');
+    $this->region = $_ENV['REGION'];
+    $this->client_id = $_ENV['CLIENT_ID'];
+    $this->userpool_id = $_ENV['USERPOOL_ID'];
   }
 
   /**
