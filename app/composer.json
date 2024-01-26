@@ -1,6 +1,7 @@
 {
     "require": {
-        "aws/aws-sdk-php": "^3.21"
+        "aws/aws-sdk-php": "^3.21",
+        "vlucas/phpdotenv": "^5.4"
     },
     "autoload": {
         "psr-4": {"AWSCognitoApp\\": "src"}
