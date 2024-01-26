@@ -4,7 +4,7 @@
  * @file
  */
 
-require '../vendor/autoload.php';
+require 'bootstrap.php';
 
 use AWSCognitoApp\AWSCognitoWrapper;
 
