@@ -14,6 +14,8 @@ class AWSCognitoWrapper {
   private $region;
   private $client_id;
   private $userpool_id;
+  private $aws_access_key_id;
+  private $aws_secret_access_key;
 
   private $client;
 
@@ -30,6 +32,8 @@ class AWSCognitoWrapper {
     $this->region = $_ENV['REGION'];
     $this->client_id = $_ENV['CLIENT_ID'];
     $this->userpool_id = $_ENV['USERPOOL_ID'];
+    $this->aws_access_key_id = $_ENV['AWS_ACCESS_KEY_ID'];
+    $this->aws_secret_access_key = $_ENV['AWS_SECRET_ACCESS_KEY'];
   }
 
   /**
@@ -39,6 +43,10 @@ class AWSCognitoWrapper {
     $this->client = new CognitoIdentityProviderClient([
       'version' => '2016-04-18',
       'region' => $this->region,
+      'credentials' => [
+        'key' => $this->aws_access_key_id,
+        'secret'  => $this->aws_secret_access_key,
+      ],
     ]);
 
     try {
