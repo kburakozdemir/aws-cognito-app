@@ -1,0 +1,23 @@
+name: aws-cognito-app
+recipe: lamp
+# config:
+#   database: mysql:8.0.29
+services:
+  database: disabled
+  appserver:
+    webroot: app/public
+    type: php:8.0
+    xdebug: debug
+    config:
+      php: .vscode/php.ini
+  # mailhog:
+  #   type: mailhog
+  #   hogfrom:
+  #     - appserver
+  # pma:
+  #   type: phpmyadmin
+tooling:
+  composer:
+    service: appserver
+    cmd:
+      - "php -d memory_limit=-1 /usr/local/bin/composer --working-dir=/app/app"
