@@ -1,4 +1,4 @@
-name: aws-cognito-app
+name: aws-cognito-app-lando
 recipe: lamp
 # config:
 #   database: mysql:8.0.29
