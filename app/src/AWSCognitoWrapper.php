@@ -132,6 +132,23 @@ class AWSCognitoWrapper {
   /**
    *
    */
+  public function resendConfirmationCode(string $username) : string {
+    try {
+      $result = $this->client->resendConfirmationCode([
+        'ClientId' => $this->client_id,
+        'Username' => $username,
+      ]);
+    }
+    catch (\Exception $e) {
+      return $e->getMessage();
+    }
+
+    return '';
+  }
+
+  /**
+   *
+   */
   public function sendPasswordResetMail(string $username) : string {
     try {
       $this->client->forgotPassword([
