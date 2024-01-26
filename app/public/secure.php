@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 require '../vendor/autoload.php';
 
 use AWSCognitoApp\AWSCognitoWrapper;
@@ -6,9 +11,9 @@ use AWSCognitoApp\AWSCognitoWrapper;
 $wrapper = new AWSCognitoWrapper();
 $wrapper->initialize();
 
-if(!$wrapper->isAuthenticated()) {
-    header('Location: /');
-    exit;
+if (!$wrapper->isAuthenticated()) {
+  header('Location: /');
+  exit;
 }
 
 $user = $wrapper->getUser();
@@ -44,11 +49,11 @@ $users = $wrapper->getPoolUsers();
         <h2>Users</h2>
         <ul>
         <?php
-        foreach($users as $user) {
-            $email_attribute_index = array_search('email', array_column($user['Attributes'], 'Name'));
-            $email = $user['Attributes'][$email_attribute_index]['Value'];
+        foreach ($users as $user) {
+          $email_attribute_index = array_search('email', array_column($user['Attributes'], 'Name'));
+          $email = $user['Attributes'][$email_attribute_index]['Value'];
 
-            echo "<li>{$user['Username']} ({$email})</li>";
+          echo "<li>{$user['Username']} ({$email})</li>";
         }
         ?>
         </ul>

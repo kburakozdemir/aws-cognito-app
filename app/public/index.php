@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 require '../vendor/autoload.php';
 
 use AWSCognitoApp\AWSCognitoWrapper;
@@ -6,34 +11,34 @@ use AWSCognitoApp\AWSCognitoWrapper;
 $wrapper = new AWSCognitoWrapper();
 $wrapper->initialize();
 
-if(isset($_POST['action'])) {
+if (isset($_POST['action'])) {
 
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
+  $username = $_POST['username'] ?? '';
+  $password = $_POST['password'] ?? '';
 
-    if($_POST['action'] === 'register') {
-        $email = $_POST['email'] ?? '';
-        $error = $wrapper->signup($username, $email, $password);
+  if ($_POST['action'] === 'register') {
+    $email = $_POST['email'] ?? '';
+    $error = $wrapper->signup($username, $email, $password);
 
-        if(empty($error)) {
-            header('Location: confirm.php?username=' . $username);
-            exit;
-        }
+    if (empty($error)) {
+      header('Location: confirm.php?username=' . $username);
+      exit;
     }
+  }
 
-    if($_POST['action'] === 'login') {
-        $error = $wrapper->authenticate($username, $password);
+  if ($_POST['action'] === 'login') {
+    $error = $wrapper->authenticate($username, $password);
 
-        if(empty($error)) {
-            header('Location: secure.php');
-            exit;
-        }
+    if (empty($error)) {
+      header('Location: secure.php');
+      exit;
     }
+  }
 }
 
 $message = '';
-if(isset($_GET['reset'])) {
-    $message = 'Your password has been reset. You can now login with your new password';
+if (isset($_GET['reset'])) {
+  $message = 'Your password has been reset. You can now login with your new password';
 }
 ?>
 

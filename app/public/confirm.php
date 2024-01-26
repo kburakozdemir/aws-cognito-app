@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 require '../vendor/autoload.php';
 
 use AWSCognitoApp\AWSCognitoWrapper;
@@ -6,15 +11,15 @@ use AWSCognitoApp\AWSCognitoWrapper;
 $wrapper = new AWSCognitoWrapper();
 $wrapper->initialize();
 
-if(isset($_POST['action'])) {
-    $username = $_POST['username'] ?? '';
-    $confirmation = $_POST['confirmation'] ?? '';
+if (isset($_POST['action'])) {
+  $username = $_POST['username'] ?? '';
+  $confirmation = $_POST['confirmation'] ?? '';
 
-    $error = $wrapper->confirmSignup($username, $confirmation);
+  $error = $wrapper->confirmSignup($username, $confirmation);
 
-    if(empty($error)) {
-        header('Location: secure.php');
-    }
+  if (empty($error)) {
+    header('Location: secure.php');
+  }
 }
 
 $username = $_GET['username'] ?? '';

@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 require '../vendor/autoload.php';
 
 use AWSCognitoApp\AWSCognitoWrapper;
