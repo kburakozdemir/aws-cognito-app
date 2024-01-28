@@ -1,4 +1,7 @@
 app/vendor
 .env
-.vscode
+
 .lando.local.yml
+
+.vscode/*
+!.vscode/settings.json
