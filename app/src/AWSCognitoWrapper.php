@@ -28,14 +28,35 @@ class AWSCognitoWrapper
      * @var string $client_id The client ID for AWS Cognito.
      */
     private $client_id;
+
+    /**
+     * @var string $userpool_id The ID of the AWS Cognito user pool.
+     */
     private $userpool_id;
+
+    /**
+     * @var string $aws_access_key_id The AWS access key ID.
+     */
     private $aws_access_key_id;
+
+    /**
+     * @var string $aws_secret_access_key The AWS secret access key.
+     */
     private $aws_secret_access_key;
 
+    /**
+     * @var object $client The AWS Cognito client.
+     */
     private $client;
 
+    /**
+     * @var null $user The user object.
+     */
     private $user = null;
 
+    /**
+     * AWSCognitoWrapper constructor.
+     */
     public function __construct()
     {
         if (!$_ENV['REGION'] || !$_ENV['CLIENT_ID'] || !$_ENV['USERPOOL_ID']) {
@@ -141,9 +162,14 @@ class AWSCognitoWrapper
         return '';
     }
 
-  /**
-   *
-   */
+
+    /**
+     * Confirms the signup of a user with the provided username and confirmation code.
+     *
+     * @param string $username The username of the user to confirm the signup for.
+     * @param string $code The confirmation code received by the user.
+     * @return string The result of the signup confirmation.
+     */
     public function confirmSignup(string $username, string $code): string
     {
         try {
@@ -159,9 +185,13 @@ class AWSCognitoWrapper
         return '';
     }
 
-  /**
-   *
-   */
+
+    /**
+     * Resends the confirmation code for a user.
+     *
+     * @param string $username The username of the user.
+     * @return string The result of the operation.
+     */
     public function resendConfirmationCode(string $username): string
     {
         try {
@@ -176,9 +206,12 @@ class AWSCognitoWrapper
         return '';
     }
 
-  /**
-   *
-   */
+    /**
+     * Sends a password reset mail to the specified username.
+     *
+     * @param string $username The username of the user.
+     * @return string The result of the operation.
+     */
     public function sendPasswordResetMail(string $username): string
     {
         try {
@@ -193,9 +226,14 @@ class AWSCognitoWrapper
         return '';
     }
 
-  /**
-   *
-   */
+    /**
+     * Resets the password for a user in AWS Cognito.
+     *
+     * @param string $code The verification code sent to the user.
+     * @param string $password The new password for the user.
+     * @param string $username The username of the user.
+     * @return string The result of the password reset operation.
+     */
     public function resetPassword(string $code, string $password, string $username): string
     {
         try {
@@ -212,17 +250,21 @@ class AWSCognitoWrapper
         return '';
     }
 
-  /**
-   *
-   */
+    /**
+     * Checks if the user is authenticated.
+     *
+     * @return bool Returns true if the user is authenticated, false otherwise.
+     */
     public function isAuthenticated(): bool
     {
         return null !== $this->user;
     }
 
-  /**
-   *
-   */
+    /**
+     * Retrieves the metadata of the Cognito user pool.
+     *
+     * @return array The metadata of the Cognito user pool.
+     */
     public function getPoolMetadata(): array
     {
         $result = $this->client->describeUserPool([
@@ -232,9 +274,11 @@ class AWSCognitoWrapper
         return $result->get('UserPool');
     }
 
-  /**
-   *
-   */
+    /**
+     * Retrieves an array of pool users.
+     *
+     * @return array The array of pool users.
+     */
     public function getPoolUsers(): array
     {
         $result = $this->client->listUsers([
@@ -244,17 +288,22 @@ class AWSCognitoWrapper
         return $result->get('Users');
     }
 
-  /**
-   *
-   */
+    /**
+     * Retrieves the user information.
+     *
+     * @return Result|null The user information if found, null otherwise.
+     */
     public function getUser(): ?Result
     {
         return $this->user;
     }
 
-  /**
-   *
-   */
+    /**
+     * Retrieves the user information for the specified username.
+     *
+     * @param string $username The username of the user to retrieve.
+     * @return array|null The user information if found, null otherwise.
+     */
     public function adminGetUser($username)
     {
       // Your Cognito user pool configuration.
@@ -289,9 +338,11 @@ class AWSCognitoWrapper
         }
     }
 
-  /**
-   *
-   */
+    /**
+     * Logs out the user from the AWS Cognito service.
+     *
+     * @return void
+     */
     public function logout()
     {
         if (isset($_COOKIE[self::COOKIE_NAME])) {
@@ -300,9 +351,13 @@ class AWSCognitoWrapper
         }
     }
 
-  /**
-   *
-   */
+
+    /**
+     * Sets the authentication cookie using the provided access token.
+     *
+     * @param string $accessToken The access token to set the authentication cookie with.
+     * @return void
+     */
     private function setAuthenticationCookie(string $accessToken): void
     {
       /*
@@ -314,9 +369,11 @@ class AWSCognitoWrapper
         setcookie(self::COOKIE_NAME, $accessToken, time() + 3600);
     }
 
-  /**
-   *
-   */
+    /**
+     * Retrieves the authentication cookie.
+     *
+     * @return string The authentication cookie.
+     */
     private function getAuthenticationCookie(): string
     {
         return $_COOKIE[self::COOKIE_NAME] ?? '';
