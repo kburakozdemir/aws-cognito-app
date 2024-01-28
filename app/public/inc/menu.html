@@ -1,11 +1,39 @@
-<h1>A Simple AWS Cognito App</h1>
-
-<h2>Menu</h2>
-<ul>
-  <li><a href="/">Index</a></li>
-  <li><a href="/secure.php">Secure page</a></li>
-  <li><a href="/confirm.php">Confirm signup</a></li>
-  <li><a href="/resendconfirmation.php">Resend Confirm</a></li>
-  <li><a href="/forgotpassword.php">Forgotten password</a></li>
-  <li><a href="/logout.php">Logout</a></li>
-</ul>
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container">
+    <a class="navbar-brand text-white" href="/">
+      <img
+        src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Cognito.svg"
+        alt="Bootstrap"
+        style="height: 50px; width: auto"
+      />
+      A Simple AWS Cognito App
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link text-white active" aria-current="page" href="/"
+          >Index</a
+        >
+        <a class="nav-link text-white" href="/secure.php">Secure page</a>
+        <a class="nav-link text-white" href="/confirm.php">Confirm signup</a>
+        <a class="nav-link text-white" href="/resendconfirmation.php"
+          >Resend Confirm</a
+        >
+        <a class="nav-link text-white" href="/forgotpassword.php"
+          >Forgotten password</a
+        >
+        <a class="nav-link text-white logout-link" href="/logout.php">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>

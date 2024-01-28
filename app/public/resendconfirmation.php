@@ -52,19 +52,20 @@ $username = $_GET['username'] ?? '';
     </head>
     <body>
         <?php echo file_get_contents('inc/menu.html'); ?>
-
-        <?php
-        if (isset($error)) {
-          ?>
-        <p style='color: red;'><?php echo $error;?></p>
+        <div class="container mt-5">
           <?php
-        }
-        ?>
-        <h2>Resend Confirmation Code</h2>
-        <form method='post' action=''>
-            <input type='text' placeholder='Username' name='username' value='<?php echo $username;?>' /><br />
-            <input type='hidden' name='action' value='resendconfirmation' />
-            <input type='submit' value='Confirm' />
-        </form>
+          if (isset($error)) {
+            ?>
+          <p style='color: red;'><?php echo $error;?></p>
+            <?php
+          }
+          ?>
+          <h2>Resend Confirmation Code</h2>
+          <form method='post' action=''>
+              <input type='text' placeholder='Username' name='username' value='<?php echo $username;?>' /><br />
+              <input type='hidden' name='action' value='resendconfirmation' />
+              <input type='submit' value='Confirm' />
+          </form>
+      </div>
     </body>
 </html>

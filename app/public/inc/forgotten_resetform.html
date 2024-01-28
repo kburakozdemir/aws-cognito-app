@@ -1,0 +1,16 @@
+<h2>Reset password</h2>
+<p>
+  If your account was found, an e-mail has been sent to the associated e-mail
+  address. Enter the code and your new password.
+</p>
+<form method="post" action="">
+  <input type="text" placeholder="Code" name="code" required /><br />
+  <input
+    type="password"
+    placeholder="Password"
+    name="password"
+    required
+  /><br />
+  <input type="hidden" name="action" value="reset" />
+  <input type="submit" value="Reset password" />
+</form>

@@ -11,37 +11,35 @@ use AWSCognitoApp\AWSCognitoWrapper;
 $wrapper = new AWSCognitoWrapper();
 $wrapper->initialize();
 
-$entercode = FALSE;
+$entercode = false;
 
 if (isset($_POST['action'])) {
+    if ($_POST['action'] === 'code') {
+        $username = $_POST['username'] ?? '';
 
-  if ($_POST['action'] === 'code') {
-    $username = $_POST['username'] ?? '';
+        $error = $wrapper->sendPasswordResetMail($username);
 
-    $error = $wrapper->sendPasswordResetMail($username);
-
-    if (empty($error)) {
-      header('Location: forgotpassword.php?username=' . $username);
+        if (empty($error)) {
+            header('Location: forgotpassword.php?username=' . $username);
+        }
     }
-  }
 
-  if ($_POST['action'] == 'reset') {
+    if ($_POST['action'] == 'reset') {
+        $code = $_POST['code'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $username = $_GET['username'] ?? '';
 
-    $code = $_POST['code'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $username = $_GET['username'] ?? '';
+        $error = $wrapper->resetPassword($code, $password, $username);
 
-    $error = $wrapper->resetPassword($code, $password, $username);
-
-    // @todo show message on new page that password has been reset.
-    if (empty($error)) {
-      header('Location: index.php?reset');
+      // @todo show message on new page that password has been reset.
+        if (empty($error)) {
+            header('Location: index.php?reset');
+        }
     }
-  }
 }
 
 if (isset($_GET['username'])) {
-  $entercode = TRUE;
+    $entercode = true;
 }
 ?>
 
@@ -56,33 +54,19 @@ if (isset($_GET['username'])) {
     </head>
     <body>
         <?php echo file_get_contents('inc/menu.html'); ?>
-
-        <?php
-        if (isset($error)) {
-          ?>
-        <p style='color: red;'><?php echo $error;?></p>
-          <?php
-        }
-        ?>
-        <?php if ($entercode) { ?>
-        <h2>Reset password</h2>
-        <p>If your account was found, an e-mail has been sent to the associated e-mailadres. Enter the code and your new password.</p>
-        <form method='post' action=''>
-            <input type='text' placeholder='Code' name='code' /><br />
-            <input type='password' placeholder='Password' name='password' /><br />
-            <input type='hidden' name='action' value='reset' />
-            <input type='submit' value='Reset password' />
-        </form>
-        <?php }
-        else { ?>
-        <h2>Forgotten password</h2>
-        <p>Enter your username and we will sent you a reset code to your e-mailadres.</p>
-        <form method='post' action=''>
-            <input type='text' placeholder='Username' name='username' /><br />
-            <input type='hidden' name='action' value='register' />
-            <input type='hidden' name='action' value='code' />
-            <input type='submit' value='Receive code' />
-        </form>
-        <?php }?>
-    </body>
+        <div class="container mt-5">
+            <?php
+            if (isset($error)) {
+                ?>
+            <p style='color: red;'><?php echo $error;?></p>
+                <?php
+            }
+            ?>
+            <?php if ($entercode) {
+                echo file_get_contents('inc/forgotten_resetform.html');
+            } else {
+                echo file_get_contents('inc/forgotten_forgotform.html');
+            }?>
+        </div>
+</body>
 </html>
