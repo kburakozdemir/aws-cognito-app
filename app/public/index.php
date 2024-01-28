@@ -8,6 +8,8 @@ require 'bootstrap.php';
 
 use AWSCognitoApp\AWSCognitoWrapper;
 
+session_start();
+
 $wrapper = new AWSCognitoWrapper();
 $wrapper->initialize();
 
@@ -33,6 +35,7 @@ if (isset($_POST['action'])) {
         $error = $wrapper->authenticate($username, $password);
 
         if (empty($error)) {
+            $_SESSION['status'] = "logged_in";
             header('Location: secure.php');
             exit;
         }
@@ -54,7 +57,7 @@ if (isset($_GET['reset'])) {
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <?php echo file_get_contents('inc/head.html'); ?>
     </head>
-    <body>
+    <body class="<?php echo (isset($_SESSION['status'])) ? $_SESSION['status'] : '' ?>">
       <?php echo file_get_contents('inc/menu.html'); ?>
       <div class="container mt-5">
         <?php

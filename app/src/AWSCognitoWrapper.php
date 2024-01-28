@@ -112,14 +112,14 @@ class AWSCognitoWrapper
     {
         try {
             $result = $this->client->adminInitiateAuth([
-            'AuthFlow' => 'ADMIN_NO_SRP_AUTH',
-            'ClientId' => $this->client_id,
-            'UserPoolId' => $this->userpool_id,
-            'AuthParameters' => [
-            'USERNAME' => $username,
-            'PASSWORD' => $password,
-            ],
-            ]);
+                'AuthFlow' => 'ADMIN_NO_SRP_AUTH',
+                'ClientId' => $this->client_id,
+                'UserPoolId' => $this->userpool_id,
+                'AuthParameters' => [
+                    'USERNAME' => $username,
+                    'PASSWORD' => $password,
+                    ],
+                ]);
         } catch (\Exception $e) {
             return $e->getMessage();
         }

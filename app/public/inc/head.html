@@ -10,11 +10,37 @@
     margin-bottom: 50px;
   }
 
+  .secure-page,
   .logout-link {
     display: none;
   }
 
-  .secure-page .logout-link {
+  .logged_in .secure-page,
+  .logged_in .logout-link {
     display: block;
   }
+
+  .logged_in .index-page,
+  .logged_in .confirm-page,
+  .logged_in .resend-page,
+  .logged_in .forgot-page {
+    display: none;
+  }
 </style>
+
+<script
+  src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+  integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+  crossorigin="anonymous"
+></script>
+
+<script>
+  // A $( document ).ready() block.
+  $(document).ready(function () {
+    if ($("body").hasClass("logged_in")) {
+      $(".navbar-brand").attr("href", "/secure.php");
+    } else {
+      $(".navbar-brand").attr("href", "/");
+    }
+  });
+</script>
