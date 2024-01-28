@@ -26,8 +26,9 @@ $users = $wrapper->getPoolUsers();
     <head>
         <meta charset='utf-8'>
         <meta http-equiv='x-ua-compatible' content='ie=edge'>
-        <title>AWS Cognito App - Register and Login</title>
+        <title>AWS Cognito App - Logged In</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <?php echo file_get_contents('inc/head.html'); ?>
     </head>
     <body>
         <?php echo file_get_contents('inc/menu.html'); ?>
@@ -40,7 +41,7 @@ $users = $wrapper->getPoolUsers();
         <p><b>Name:</b> <?php echo $pool['Name'];?></p>
         <p><b>CreationDate:</b> <?php echo $pool['CreationDate'];?></p>
 
-        <h2>Users</h2>
+        <h2>Users (<?php echo count($users); ?>)</h2>
         <ul>
         <?php
         foreach ($users as $user) {
