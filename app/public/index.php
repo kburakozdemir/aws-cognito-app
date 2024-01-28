@@ -11,6 +11,10 @@ use AWSCognitoApp\AWSCognitoWrapper;
 $wrapper = new AWSCognitoWrapper();
 $wrapper->initialize();
 
+if (isset($_GET['messagetoprint'])) {
+  $messageToPrint = $_GET['messagetoprint'];
+}
+
 if (isset($_POST['action'])) {
 
   $username = $_POST['username'] ?? '';
@@ -60,7 +64,21 @@ if (isset($_GET['reset'])) {
           <?php
         }
         ?>
+        <?php
+        if (isset($message)) {
+          ?>
         <p style='color: green;'><?php echo $message;?></p>
+          <?php
+        }
+        ?>
+          <?php
+        if (isset($messageToPrint)) {
+          ?>
+        <p style='color: blue;'><?php echo $messageToPrint;?></p>
+          <?php
+        }
+        ?>
+
         <h1>Register</h1>
         <form method='post' action=''>
             <input type='text' placeholder='Username' name='username' /><br />

@@ -14,7 +14,24 @@ $wrapper->initialize();
 if (isset($_POST['action'])) {
   $username = $_POST['username'] ?? '';
 
-  $error = $wrapper->resendConfirmationCode($username);
+
+  $result = $wrapper->adminGetUser($username);
+
+  if ($result["UserStatus"] == "CONFIRMED") {
+    $messageToPrint = "User has already been confirmed";
+    $url = "/?messagetoprint=" . $messageToPrint;
+    header('Location: ' . $url);
+    exit;
+  }
+  else {
+    if ($result["UserStatus"] == "UNCONFIRMED") {
+      $error = $wrapper->resendConfirmationCode($username);
+    }
+  }
+
+  if ($result["UserStatus"] == "N/A") {
+    $error = "User does not exist";
+  }
 
   if (empty($error)) {
     header('Location: confirm.php');

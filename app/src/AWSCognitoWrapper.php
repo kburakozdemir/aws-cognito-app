@@ -221,6 +221,43 @@ class AWSCognitoWrapper {
   /**
    *
    */
+  public function adminGetUser($username) {
+    // Your Cognito user pool configuration.
+    $userPoolId = $this->userpool_id;
+
+    // Call adminGetUser to check if the user exists.
+    try {
+      $result = $this->client->adminGetUser([
+        'UserPoolId' => $userPoolId,
+        'Username'   => $username,
+      ]);
+
+      // If the user exists, $result will contain user attributes.
+      // var_dump($result);
+      $returnResult['status'] = 'SUCCESS';
+      $returnResult['userExistsInCognitoPool'] = TRUE;
+      $returnResult['Username'] = $result['Username'];
+      $returnResult['UserStatus'] = $result['UserStatus'];
+      $returnResult['exceptionMessage'] = NULL;
+
+      return $returnResult;
+    }
+    catch (\Exception $e) {
+      // If the user does not exist,
+      // CognitoIdentityProviderException will be thrown.
+      // echo 'User does not exist: ' . $e->getMessage();
+      $returnResult['status'] = 'FAIL';
+      $returnResult['userExistsInCognitoPool'] = FALSE;
+      $returnResult['Username'] = 'N/A';
+      $returnResult['UserStatus'] = 'N/A';
+      $returnResult['exceptionMessage'] = $e->getMessage();
+      return $returnResult;
+    }
+  }
+
+  /**
+   *
+   */
   public function logout() {
     if (isset($_COOKIE[self::COOKIE_NAME])) {
       unset($_COOKIE[self::COOKIE_NAME]);
