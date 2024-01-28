@@ -54,7 +54,7 @@ if (isset($_GET['username'])) {
         <meta name='viewport' content='width=device-width, initial-scale=1'>
     </head>
     <body>
-        <?php include "inc/menu.php"; ?>
+        <?php echo file_get_contents('inc/menu.html'); ?>
 
         <?php
         if (isset($error)) {
@@ -64,7 +64,7 @@ if (isset($_GET['username'])) {
         }
         ?>
         <?php if ($entercode) { ?>
-        <h1>Reset password</h1>
+        <h2>Reset password</h2>
         <p>If your account was found, an e-mail has been sent to the associated e-mailadres. Enter the code and your new password.</p>
         <form method='post' action=''>
             <input type='text' placeholder='Code' name='code' /><br />
@@ -74,7 +74,7 @@ if (isset($_GET['username'])) {
         </form>
         <?php }
         else { ?>
-        <h1>Forgotten password</h1>
+        <h2>Forgotten password</h2>
         <p>Enter your username and we will sent you a reset code to your e-mailadres.</p>
         <form method='post' action=''>
             <input type='text' placeholder='Username' name='username' /><br />

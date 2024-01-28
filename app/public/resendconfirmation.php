@@ -50,7 +50,7 @@ $username = $_GET['username'] ?? '';
         <meta name='viewport' content='width=device-width, initial-scale=1'>
     </head>
     <body>
-        <?php include "inc/menu.php"; ?>
+        <?php echo file_get_contents('inc/menu.html'); ?>
 
         <?php
         if (isset($error)) {
@@ -59,7 +59,7 @@ $username = $_GET['username'] ?? '';
           <?php
         }
         ?>
-        <h1>Resend Confirmation Code</h1>
+        <h2>Resend Confirmation Code</h2>
         <form method='post' action=''>
             <input type='text' placeholder='Username' name='username' value='<?php echo $username;?>' /><br />
             <input type='hidden' name='action' value='resendconfirmation' />

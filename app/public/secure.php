@@ -30,7 +30,7 @@ $users = $wrapper->getPoolUsers();
         <meta name='viewport' content='width=device-width, initial-scale=1'>
     </head>
     <body>
-        <?php include "inc/menu.php"; ?>
+        <?php echo file_get_contents('inc/menu.html'); ?>
 
         <h2>Secure page</h2>
         <p>Welcome <strong><?php echo $user->get('Username');?></strong>! You are succesfully authenticated. Some <em>secret</em> information about this user pool:</p>

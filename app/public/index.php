@@ -55,7 +55,7 @@ if (isset($_GET['reset'])) {
         <meta name='viewport' content='width=device-width, initial-scale=1'>
     </head>
     <body>
-        <?php include "inc/menu.php"; ?>
+        <?php echo file_get_contents('inc/menu.html'); ?>
 
         <?php
         if (isset($error)) {
@@ -79,7 +79,7 @@ if (isset($_GET['reset'])) {
         }
         ?>
 
-        <h1>Register</h1>
+        <h2>Register</h2>
         <form method='post' action=''>
             <input type='text' placeholder='Username' name='username' /><br />
             <input type='text' placeholder='Email' name='email' /><br />
@@ -88,7 +88,7 @@ if (isset($_GET['reset'])) {
             <input type='submit' value='Register' />
         </form>
 
-        <h1>Login</h1>
+        <h2>Login</h2>
         <form method='post' action=''>
             <input type='text' placeholder='Username' name='username' /><br />
             <input type='password' placeholder='Password' name='password' /><br />
