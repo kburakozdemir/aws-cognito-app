@@ -19,9 +19,9 @@ if (isset($_POST['action'])) {
     if ($_POST['action'] === 'code') {
         $username = $_POST['username'] ?? '';
 
-        $error = $wrapper->sendPasswordResetMail($username);
+        $result = $wrapper->sendPasswordResetMail($username);
 
-        if (empty($error)) {
+        if (empty($result['error'])) {
             header('Location: forgotpassword.php?username=' . $username);
         }
     }

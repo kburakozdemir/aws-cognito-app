@@ -6,15 +6,13 @@
       </div>
       <div class="card-body">
         <form method="post" action="">
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
+          <div class="mb-3 d-none">
+            <label class="form-label">Username</label>
             <input
-              type="text"
+              type="hidden"
               class="form-control"
               id="username"
               name="username"
-              placeholder="Username"
-              required
             />
           </div>
           <div class="mb-3">
@@ -54,13 +52,13 @@
       <div class="card-body">
         <form method="post" action="">
           <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
+            <label for="username_login" class="form-label">Email</label>
             <input
               type="text"
               class="form-control"
-              id="username"
+              id="username_login"
               name="username"
-              placeholder="Username"
+              placeholder="Email"
               required
             />
           </div>
@@ -69,7 +67,7 @@
             <input
               type="password"
               class="form-control"
-              id="password"
+              id="password_login"
               name="password"
               placeholder="Password"
               required
@@ -78,7 +76,9 @@
           <input type="hidden" name="action" value="login" />
           <input type="submit" class="btn btn-primary" value="Login" />
         </form>
-        <p><a href="/forgotpassword.php">Forgot password?</a></p>
+      </div>
+      <div class="card-footer">
+        <a href="/forgotpassword.php">Forgot password?</a>
       </div>
     </div>
   </div>

@@ -210,20 +210,26 @@ class AWSCognitoWrapper
      * Sends a password reset mail to the specified username.
      *
      * @param string $username The username of the user.
-     * @return string The result of the operation.
+     * @return array The result of the operation.
      */
-    public function sendPasswordResetMail(string $username): string
+    public function sendPasswordResetMail(string $username): array
     {
         try {
-            $this->client->forgotPassword([
-            'ClientId' => $this->client_id,
-            'Username' => $username,
+            $result = $this->client->forgotPassword([
+                'ClientId' => $this->client_id,
+                'Username' => $username,
             ]);
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
 
-        return '';
+            return [
+                "result"=> $result,
+                "error"=> '',
+            ];
+        } catch (\Exception $e) {
+            return [
+                "result"=> '',
+                "error"=> $e->getMessage(),
+            ];
+        }
     }
 
     /**

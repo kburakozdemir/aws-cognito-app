@@ -23,10 +23,10 @@ if (isset($_POST['action'])) {
 
     if ($_POST['action'] === 'register') {
         $email = $_POST['email'] ?? '';
-        $error = $wrapper->signup($username, $email, $password);
+        $error = $wrapper->signup($email, $email, $password);
 
         if (empty($error)) {
-            header('Location: confirm.php?username=' . $username);
+            header('Location: confirm.php?username=' . $email);
             exit;
         }
     }
