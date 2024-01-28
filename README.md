@@ -46,7 +46,7 @@ With the AWS Cognito user pool set up and the correct configuration added to the
 
 1. [Install Lando](https://lando.dev/download/)
 2. Clone this repository
-3. Checkout test branch (`git checkout test`)
+3. Checkout `lando-and-non-ec2` branch (`git checkout lando-and-non-ec2`)
 4. Run `lando start`.
 5. Run `lando composer install`.
 6. Visit lando url.
